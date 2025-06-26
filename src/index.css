@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn {
+  border: 1px solid red;
+  border-radius: 2rem;
+}
+input[type='range'] {
+  --thumb-size: 1rem;
+  accent-color: none;
+}
+
+input[type='range']::-webkit-slider-thumb {
+  appearance: none;
+  height: var(--thumb-size);
+  width: var(--thumb-size);
+  background: '#2E004E';
+  border-radius: 9999px;
+  border-color: gray;
+  cursor: pointer;
+}
+
+input[type='range']::-moz-range-thumb {
+  height: var(--thumb-size);
+  width: var(--thumb-size);
+  background: black;
+  border-radius: 9999px;
+  border-color: gray;
+  cursor: pointer;
+}
