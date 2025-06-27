@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import { X } from 'lucide-react';
 import { useState } from 'react';
 import { PopupContext } from './popupContext';
+import { CircleAlertIcon, CircleX, CircleCheckIcon } from 'lucide-react';
 
 const ANIMATION_DURATION = 200;
 const BASE_DURATION = 3000;
@@ -93,7 +94,7 @@ export function PopupProvider({ children, location }: Props) {
     isClosing: boolean,
   ) {
     return clsx(
-      'relative z-50 min-w-[300px] rounded-lg px-6 py-4 shadow-popup',
+      'relative z-50 min-w-[300px] rounded-lg px-4 py-4 shadow-popup',
       'animate-fade-down animate-duration-200 transform transition-transform',
       {
         'bg-nebula-success text-nebula-900 dark:bg-nebula-success-dark':
@@ -118,14 +119,23 @@ export function PopupProvider({ children, location }: Props) {
             className={getPopupStyles(popup.type, popup.isClosing)}
             key={popup.id}
           >
-            <h3 className="font-semibold">{popup.type}</h3>
-            {popup.message}
-            <button
-              className="hover:text-red animate-once animate-duration-100 absolute right-1 top-1 hover:text-red-600 active:animate-ping"
-              onClick={() => close(popup.id)}
-            >
-              <X className="w-6" />
-            </button>
+            <div className="flex">
+              {
+                {
+                  info: <CircleAlertIcon className="mr-2" />,
+                  error: <CircleX className="mr-2" />,
+                  success: <CircleCheckIcon className="mr-2" />,
+                }[popup.type]
+              }
+
+              {popup.message}
+              <button
+                className="hover:text-red animate-once animate-duration-100 absolute right-1 top-1 hover:text-red-600 active:animate-ping"
+                onClick={() => close(popup.id)}
+              >
+                <X className="w-6" />
+              </button>
+            </div>
           </div>
         ))}
       </div>
