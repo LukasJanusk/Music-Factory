@@ -9,7 +9,7 @@ function App() {
     <Layout>
       <Topbar />
       <Body>
-        <div className="bg-nebula-200 dark:bg-nebula-700 dark:text-nebula-100 flex w-screen items-center justify-center">
+        <div className="flex w-screen items-center justify-center bg-nebula-200 dark:bg-nebula-700 dark:text-nebula-100">
           <SongsGrid />
         </div>
       </Body>

@@ -1,80 +1,40 @@
 import { Grid } from '@mui/material';
 import SongGridItem from './SongGridItem';
+import useSongStore from '../store';
+
 export default function SongsGrid() {
-  const songs = [
-    {
-      id: '1',
-      title: 'Song title',
-      url: 'song_url_here',
-      cover: 'song_cover_img_here',
-      artist: 'Artist name',
-      favorite: true,
-    },
-    {
-      id: '2',
-      title: 'Song title',
-      url: 'song_url_here',
-      cover: 'song_cover_img_here',
-      artist: 'Artist name',
-      favorite: true,
-    },
-    {
-      id: '3',
-      title: 'Song title',
-      url: 'song_url_here',
-      cover: 'song_cover_img_here',
-      artist: 'Artist name',
-      favorite: true,
-    },
-    {
-      id: '4',
-      title: 'Song title',
-      url: 'song_url_here',
-      cover: 'song_cover_img_here',
-      artist: 'Artist name',
-      favorite: true,
-    },
-    {
-      id: '5',
-      title: 'Song title',
-      url: 'song_url_here',
-      cover: 'song_cover_img_here',
-      artist: 'Artist name',
-      favorite: true,
-    },
-    {
-      id: '6',
-      title: 'Song title',
-      url: 'song_url_here',
-      cover: 'song_cover_img_here',
-      artist: 'Artist name',
-      favorite: true,
-    },
-    {
-      id: '7',
-      title: 'Song title',
-      url: 'song_url_here',
-      cover: 'song_cover_img_here',
-      artist: 'Artist name',
-      favorite: true,
-    },
-  ];
+  const songs = useSongStore((s) => s.songs);
+  const favorites = useSongStore((s) => s.favoriteSongs);
+  const getSongs = useSongStore((s) => s.addSongs);
+  const handleFetch = () => {
+    getSongs('Love');
+  };
+
   return (
-    <Grid container spacing={2} justifyContent={'start'} alignItems={'start'}>
-      {songs.map((song) => (
-        <Grid
-          key={song.id}
-          item
-          xs={12}
-          sm={6}
-          md={4}
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-        >
-          <SongGridItem />
-        </Grid>
-      ))}
-    </Grid>
+    <div>
+      {' '}
+      <Grid container spacing={2} justifyContent={'start'} alignItems={'start'}>
+        {songs.map((song) => (
+          <Grid
+            key={song.id}
+            item
+            xs={12}
+            sm={6}
+            md={4}
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+          >
+            <SongGridItem song={song} />
+          </Grid>
+        ))}
+      </Grid>
+      <button
+        onClick={handleFetch}
+        className="rounded-xl border-2 border-nebula-400 border-transparent bg-nebula-800 px-4 py-2 transition-all duration-200 hover:border-dotted"
+      >
+        Fetch Songs
+      </button>
+    </div>
   );
 }

@@ -6,19 +6,29 @@ import CardMedia from '@mui/material/CardMedia';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import { SkipBack, SkipForward, Play } from 'lucide-react';
+import type { Song } from '../songService/schema';
 
-export default function SongGridItem() {
+type Props = {
+  song: Song;
+};
+export default function SongGridItem({ song }: Props) {
   const theme = useTheme();
 
   return (
-    <Card sx={{ display: 'flex' }}>
-      <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+    <Card sx={{ display: 'flex', minWidth: '380px', maxWidth: '460px' }}>
+      <Box
+        className="bg-nebula-200/50 dark:bg-nebula-600/50"
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+        }}
+      >
         <CardContent sx={{ flex: '1 0 auto' }}>
           <Typography component="div" variant="h5">
-            Live From Space
+            {song.name}
           </Typography>
           <Typography variant="subtitle1" component="div">
-            Mac Miller
+            {song.artistName}
           </Typography>
         </CardContent>
         <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
@@ -36,8 +46,8 @@ export default function SongGridItem() {
       <CardMedia
         component="img"
         sx={{ width: 151 }}
-        image="/static/images/cards/live-from-space.jpg"
-        alt="Live from space album cover"
+        image={song.image}
+        alt={`${song.name} image`}
       />
     </Card>
   );
