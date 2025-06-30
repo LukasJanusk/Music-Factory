@@ -1,4 +1,3 @@
-import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -12,34 +11,53 @@ type Props = {
   song: Song;
 };
 export default function SongGridItem({ song }: Props) {
-  const theme = useTheme();
-
   return (
-    <Card sx={{ display: 'flex', minWidth: '380px', maxWidth: '460px' }}>
+    <Card
+      sx={{
+        display: 'flex',
+        minWidth: '380px',
+
+        justifyContent: 'space-between',
+      }}
+    >
       <Box
-        className="bg-nebula-200/50 dark:bg-nebula-600/50"
+        className="flex-grow bg-nebula-300/50 dark:bg-nebula-600/50"
         sx={{
           display: 'flex',
           flexDirection: 'column',
         }}
       >
-        <CardContent sx={{ flex: '1 0 auto' }}>
-          <Typography component="div" variant="h5">
+        <CardContent
+          sx={{ flex: '1 0 auto' }}
+          className="text-nebula-900 dark:text-nebula-100"
+        >
+          <Typography
+            component="div"
+            variant="h5"
+            className="font-extrabold text-nebula-600 dark:text-nebula-200"
+          >
             {song.name}
           </Typography>
-          <Typography variant="subtitle1" component="div">
+          <Typography
+            variant="subtitle1"
+            component="div"
+            className="font-extrabold text-nebula-900 dark:text-nebula-100"
+          >
             {song.artistName}
           </Typography>
         </CardContent>
         <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
           <IconButton aria-label="previous">
-            {theme.direction === 'rtl' ? <SkipForward /> : <SkipBack />}
+            <SkipBack className="text-nebula-900 dark:text-nebula-100" />
           </IconButton>
           <IconButton aria-label="play/pause">
-            <Play style={{ height: 38, width: 38 }} />
+            <Play
+              style={{ height: 38, width: 38 }}
+              className="text-nebula-900 dark:text-nebula-100"
+            />
           </IconButton>
           <IconButton aria-label="next">
-            {theme.direction === 'rtl' ? <SkipBack /> : <SkipForward />}
+            <SkipForward className="text-nebula-900 dark:text-nebula-100" />
           </IconButton>
         </Box>
       </Box>

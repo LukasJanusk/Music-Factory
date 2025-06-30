@@ -3,15 +3,10 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import defaultCardImage from '@/assets/song_image_default.png';
 import HeartIcon from '../reausable/HeartIcon';
+import type { Song } from '../../songService/schema';
 
 type Props = {
-  song?: {
-    title: string;
-    url: string;
-    cover: string;
-    artist: string;
-    favorite: boolean;
-  };
+  song: Song | null;
 };
 
 const defaultSong = {
@@ -22,7 +17,8 @@ const defaultSong = {
   favorite: true,
 };
 
-export default function SongCard({ song = defaultSong }: Props) {
+export default function SongCard({ song }: Props) {
+  if (!song) return <div></div>;
   return (
     <div>
       <Card
@@ -44,8 +40,8 @@ export default function SongCard({ song = defaultSong }: Props) {
         <Box sx={{ display: 'flex' }}>
           <CardContent sx={{ display: 'flex', flexDirection: 'column' }}>
             <span className="dark:text-nebula-100">Song title here</span>
-            <span className="dark:text-nebula-200 text-nebula-800 font-bold">
-              {song.artist}
+            <span className="font-bold text-nebula-800 dark:text-nebula-200">
+              {song.artistName}
             </span>
           </CardContent>
         </Box>

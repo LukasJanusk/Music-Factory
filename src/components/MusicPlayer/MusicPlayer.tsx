@@ -3,13 +3,15 @@ import { useState } from 'react';
 import ProgressBar from './ProgressBar';
 import VolumeControls from './VolumeControls';
 import SongCard from './SongCard';
+import useSongStore from '../../store';
 
 const controlButtonBaseStyles = `h-7 w-7 hover:text-nebula-500 dark:text-nebula-100 transition-all duration-200`;
 const playStopButtonBaseStyles = `hover:border-nebula-500 hover:text-nebula-300 dark:hover:text-nebula-700 animate-duration-150 hover:animate-wiggle hover:animate-infinite dark:bg-nebula-100 bg-nebula-600 text-nebula-100 rounded-full border-2 border-transparent p-2 transition-all duration-200 dark:text-nebula-900`;
 export default function MusicPlayer() {
+  const current = useSongStore((s) => s.currentSong);
   const [isPlaying, setIsPlaying] = useState(false);
   return (
-    <div className="bg-nebula-500/30 dark:bg-nebula-900/50 animate-fade-up bottom-0 left-0 flex h-20 w-full max-w-[1280px] items-center justify-between gap-4 shadow-lg">
+    <div className="bottom-0 left-0 flex h-20 w-full animate-fade-up items-center justify-between gap-4 bg-nebula-300 shadow-lg dark:bg-nebula-800">
       <div className="ml-4 flex items-center justify-end gap-1 text-black">
         <SkipBack className={controlButtonBaseStyles} />
         <div className={playStopButtonBaseStyles}>
@@ -33,7 +35,7 @@ export default function MusicPlayer() {
         <VolumeControls />
       </div>
       <div className="flex items-start">
-        <SongCard />
+        <SongCard song={current} />
       </div>
     </div>
   );

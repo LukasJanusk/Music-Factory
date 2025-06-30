@@ -7,7 +7,7 @@ import Search from './Search/Search';
 
 export default function Topbar() {
   return (
-    <div className="left-0 top-0 flex min-h-20 w-screen items-center justify-start gap-2 bg-nebula-300 text-nebula-900 dark:bg-nebula-800 dark:text-nebula-100">
+    <div className="flex min-h-20 w-screen items-center justify-start gap-2 bg-nebula-300 text-nebula-900 dark:bg-nebula-800 dark:text-nebula-100">
       <div className="flex flex-1 items-center justify-start gap-6">
         <div className="flex items-center gap-2 text-nebula-700 dark:text-nebula-200">
           <BrandLogo className="ml-4 h-8 w-8" />
