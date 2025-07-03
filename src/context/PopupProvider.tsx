@@ -2,7 +2,12 @@ import clsx from 'clsx';
 import { X } from 'lucide-react';
 import { useState } from 'react';
 import { PopupContext } from './popupContext';
-import { CircleAlertIcon, CircleX, CircleCheckIcon } from 'lucide-react';
+import {
+  CircleAlertIcon,
+  CircleX,
+  CircleCheckIcon,
+  LightbulbIcon,
+} from 'lucide-react';
 
 const ANIMATION_DURATION = 200;
 const BASE_DURATION = 3000;
@@ -21,7 +26,7 @@ export function PopupProvider({ children, location }: Props) {
   const [popups, setPopups] = useState<
     {
       id: number;
-      type: 'success' | 'error' | 'info';
+      type: 'success' | 'error' | 'info' | 'alert';
       message: string;
       isClosing: boolean;
     }[]
@@ -38,7 +43,10 @@ export function PopupProvider({ children, location }: Props) {
     }, ANIMATION_DURATION);
   };
 
-  const show = (type: 'success' | 'error' | 'info', message: string) => {
+  const show = (
+    type: 'success' | 'error' | 'info' | 'alert',
+    message: string,
+  ) => {
     const id = Date.now();
     setPopups((prev) => [...prev, { id, type, message, isClosing: false }]);
 
@@ -76,10 +84,12 @@ export function PopupProvider({ children, location }: Props) {
 
   const containerPositionStyles = clsx(
     'fixed z-50 flex gap-4',
-    location.startsWith('top') ? 'top-6 flex-col-reverse' : 'bottom-6 flex-col',
-    location.endsWith('left') && 'left-6',
+    location.startsWith('top')
+      ? 'top-6 flex-col-reverse'
+      : 'bottom-24 flex-col',
+    location.endsWith('left') && 'left-2',
     location.endsWith('center') && 'left-1/2 -translate-x-1/2',
-    location.endsWith('right') && 'right-6',
+    location.endsWith('right') && 'right-2',
   );
   const containerAnimationStyles =
     'transition-all duration-200 animate-in fade-in slide-in-from-top';
@@ -90,7 +100,7 @@ export function PopupProvider({ children, location }: Props) {
   );
 
   function getPopupStyles(
-    type: 'success' | 'error' | 'info',
+    type: 'success' | 'error' | 'info' | 'alert',
     isClosing: boolean,
   ) {
     return clsx(
@@ -102,6 +112,8 @@ export function PopupProvider({ children, location }: Props) {
         'bg-nebula-error text-nebula-100 dark:bg-nebula-error-dark':
           type === 'error',
         'bg-nebula-notification text-nebula-900 dark:bg-nebula-notification-dark':
+          type === 'alert',
+        'bg-nebula-500 text-nebula-100 dark:bg-nebula-200 dark:text-nebula-900':
           type === 'info',
       },
       isClosing && 'pointer-events-none',
@@ -119,18 +131,19 @@ export function PopupProvider({ children, location }: Props) {
             className={getPopupStyles(popup.type, popup.isClosing)}
             key={popup.id}
           >
-            <div className="flex">
+            <div className="flex max-w-96 items-start pr-6">
               {
                 {
-                  info: <CircleAlertIcon className="mr-2" />,
-                  error: <CircleX className="mr-2" />,
-                  success: <CircleCheckIcon className="mr-2" />,
+                  info: <LightbulbIcon className="mr-2 h-10 w-10" />,
+                  error: <CircleX className="mr-2 h-10 w-10" />,
+                  success: <CircleCheckIcon className="mr-2 h-10 w-10" />,
+                  alert: <CircleAlertIcon className="mr-2 h-10 w-10" />,
                 }[popup.type]
               }
 
               {popup.message}
               <button
-                className="hover:text-red animate-once animate-duration-100 absolute right-1 top-1 hover:text-red-600 active:animate-ping"
+                className="hover:text-red absolute right-1 top-1 animate-duration-100 animate-once hover:text-red-600 active:animate-ping"
                 onClick={() => close(popup.id)}
               >
                 <X className="w-6" />

@@ -6,6 +6,7 @@ const headersSchema = z.object({
   error_message: z.string(),
   warnings: z.string(),
   results_count: z.number(),
+  results_fullcount: z.number(),
 });
 const songSchema = z.object({
   id: z.string(),
@@ -16,6 +17,7 @@ const songSchema = z.object({
   image: z.string(),
   audio: z.string(),
   audiodownload: z.string(),
+  duration: z.coerce.number(),
 });
 const responseSchema = z.object({
   headers: headersSchema,
@@ -33,13 +35,18 @@ const transformedSchema = songSchema.transform((data) => ({
   image: data.image,
   audio: data.audio,
   audioDownload: data.audiodownload,
+  duration: data.duration,
   isFavorite: false,
 }));
 
 export type Song = z.infer<typeof transformedSchema>;
 
-export function getSongsFromResponse(data: unknown): Song[] {
+export function getSongsFromResponse(data: unknown): {
+  results: number;
+  songs: Song[];
+} {
   const parsed = parseResponse(data);
+  const resultsCount = parsed.headers.results_fullcount;
   const songs = parsed.results.map((song) => transformedSchema.parse(song));
-  return songs;
+  return { results: resultsCount, songs: songs };
 }

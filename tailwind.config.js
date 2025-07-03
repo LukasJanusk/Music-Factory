@@ -4,6 +4,15 @@ export default {
   content: ['./index.html', './src/**/*.{ts,tsx}'],
   theme: {
     extend: {
+      keyframes: {
+        glow: {
+          '0%, 100%': { boxShadow: '0 0 5px #fff' },
+          '50%': { boxShadow: '0 0 15px #0ff' },
+        },
+      },
+      animation: {
+        glow: 'glow 2s ease-in-out infinite',
+      },
       maxWidth: {
         'screen-1080': '1080px',
       },

@@ -11,6 +11,7 @@ const createJamendo = () => {
       format: 'json',
       offset: String(offset),
       limit: String(limit),
+      fullcount: 'true',
     });
 
     try {
@@ -18,16 +19,16 @@ const createJamendo = () => {
         `https://api.jamendo.com/v3.0/tracks/?${params}`,
       );
       const data = await response.json();
-      const songs = getSongsFromResponse(data);
+      const parsed = getSongsFromResponse(data);
 
-      return songs;
+      return parsed;
     } catch (error) {
       console.error(
         error instanceof Error
           ? error.message
           : 'Unknown error occured fetching songs',
       );
-      return [];
+      throw error;
     }
   };
   return { getSongs };

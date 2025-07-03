@@ -1,21 +1,62 @@
 import { Slider } from '@mui/material';
+import useSongStore from '../../store';
+import { useEffect, useState } from 'react';
+import formatTime from '../../utils/formatTime';
 
 export default function ProgressBar() {
+  const audio = useSongStore((s) => s.getAudio());
+  const repeat = useSongStore((s) => s.repeat);
+  const autoplay = useSongStore((s) => s.autoplay);
+  const setIsPlaying = useSongStore((s) => s.setCurrentPlaying);
+  const [progress, setProgress] = useState(0);
+  const handleProgressChange = (_: Event, value: number | number[]) => {
+    if (typeof value === 'number') {
+      audio.currentTime = value;
+    }
+  };
+  useEffect(() => {
+    const update = () => setProgress(audio.currentTime);
+    audio.addEventListener('timeupdate', update);
+    return () => audio.removeEventListener('timeupdate', update);
+  }, [audio]);
+  useEffect(() => {
+    const handleEnded = () => {
+      if (!repeat || !autoplay) {
+        audio.pause();
+        audio.currentTime = 0;
+        setProgress(0);
+        setIsPlaying(false);
+      }
+    };
+
+    audio.addEventListener('ended', handleEnded);
+    return () => {
+      audio.removeEventListener('ended', handleEnded);
+    };
+  }, [repeat, autoplay, audio, setIsPlaying, setProgress]);
   return (
-    <Slider
-      color="secondary"
-      sx={{
-        '& .MuiSlider-thumb': {
-          boxShadow: 'none',
-          '&:hover, &.Mui-focusVisible, &.Mui-active': {
+    <div className="flex w-full flex-row items-center gap-2">
+      <span className="pr-2 text-nebula-900 dark:text-nebula-100">
+        {formatTime(progress)}
+      </span>
+      <Slider
+        color="secondary"
+        aria-label="show"
+        value={progress}
+        onChange={handleProgressChange}
+        max={audio.duration || 100}
+        sx={{
+          '& .MuiSlider-thumb': {
             boxShadow: 'none',
+            '&:hover, &.Mui-focusVisible, &.Mui-active': {
+              boxShadow: 'none',
+            },
           },
-        },
-      }}
-    />
+        }}
+      />
+      <span className="pl-2 text-nebula-900 dark:text-nebula-100">
+        {formatTime(isNaN(audio.duration) ? 0 : audio.duration)}
+      </span>
+    </div>
   );
 }
-//    <div className="bg-nebula-200 dark:bg-nebula-700 ull w-inherit flex w-full rounded-xl p-0.5">
-//       <div className="from-nebula-400 to-nebula-600 dark:from-nebula-500 dark:to-nebula-300 h-3 w-1/2 rounded-xl bg-gradient-to-r"></div>
-//       <div className="bg-nebula-100 dark:bg-nebula-100 po h-3 w-3 -translate-x-2 rounded-full"></div>
-//     </div>

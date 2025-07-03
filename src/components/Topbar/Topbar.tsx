@@ -4,8 +4,12 @@ import Avatar from '@/assets/user.png';
 import { NavButton } from './NavButton';
 import BrandNameHeader from './BrandNameHeader';
 import Search from './Search/Search';
+import { useViewContext } from '../../context/viewContext';
+import useSongStore from '../../store';
 
 export default function Topbar() {
+  const { setRoute } = useViewContext();
+  const { setSongs, favoriteSongs } = useSongStore((s) => s);
   return (
     <div className="flex min-h-20 w-screen items-center justify-start gap-2 bg-nebula-300 text-nebula-900 dark:bg-nebula-800 dark:text-nebula-100">
       <div className="flex flex-1 items-center justify-start gap-6">
@@ -14,9 +18,19 @@ export default function Topbar() {
           <BrandNameHeader label="Music Factory" />
         </div>
         <nav className="hidden items-center gap-1 md:flex">
-          <NavButton label={'Home'} onClick={() => {}} />
-          <NavButton label={'Library'} onClick={() => {}} />
-          <NavButton label={'Artists'} onClick={() => {}} />
+          <NavButton
+            label={'home'}
+            onClick={() => {
+              setRoute('home');
+            }}
+          />
+          <NavButton
+            label={'favorites'}
+            onClick={() => {
+              setRoute('favorites');
+              setSongs(favoriteSongs);
+            }}
+          />
         </nav>
       </div>
       <div className="flex flex-1 items-center justify-center">
