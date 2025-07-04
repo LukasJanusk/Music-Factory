@@ -5,13 +5,14 @@ export type AppStore = {
   currentSong: Song | null;
   currentPlaying: boolean;
   favoriteSongs: Song[];
+  autoplay: boolean;
+  repeat: boolean;
   query: string;
   offset: number;
   limit: number;
   page: number;
   results: number;
-  autoplay: boolean;
-  repeat: boolean;
+
   setAutoplay: (value: boolean) => void;
   setRepeat: (value: boolean) => void;
   getAudio: () => HTMLAudioElement;
@@ -22,8 +23,8 @@ export type AppStore = {
   setCurrent: (song: Song | null) => void;
   setCurrentPlaying: (isPlaying: boolean) => void;
   setQuery: (query: string) => void;
-  setPage: (page: number) => void;
-  getSongs: (query: string) => void;
+  setPage: (page: number) => Promise<void>;
+  getSongs: (query: string) => Promise<void>;
   addFavoriteSong: (song: Song) => void;
   removeFavoriteSong: (id: string) => void;
   setSongs: (songs: Song[]) => void;

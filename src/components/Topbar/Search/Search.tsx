@@ -2,20 +2,18 @@ import { Autocomplete, IconButton, TextField } from '@mui/material';
 import { autocompleteSuggestions } from './searchAutocomplete';
 import { SearchIcon } from 'lucide-react';
 import useSongStore from '../../../store';
-import { useIsDarkTheme } from '../../../hooks/useIsDarkTheme';
 import { useViewContext } from '../../../context/viewContext';
 
 export default function Search() {
   const listboxStyles =
     'overflow-hidden bg-nebula-200 dark:bg-nebula-600 text-nebula-900 dark:text-nebula-200';
-  const isDark = useIsDarkTheme();
   const query = useSongStore((s) => s.query);
   const setQuery = useSongStore((s) => s.setQuery);
   const setPage = useSongStore((s) => s.setPage);
   const { route, setRoute } = useViewContext();
-  const handleSearch = () => {
+  const handleSearch = async () => {
     if (query.length > 0) {
-      setPage(1);
+      await setPage(1);
       if (route !== 'home') {
         setRoute('home');
       }
@@ -38,15 +36,15 @@ export default function Search() {
         disableClearable
         options={autocompleteSuggestions}
         sx={{
-          color: () => (isDark ? 'white' : 'black'),
+          color: 'white',
           '& .MuiOutlinedInput-root': {
             '&:hover .MuiOutlinedInput-notchedOutline': {
-              borderColor: () => (isDark ? 'white' : 'black'),
+              borderColor: () => 'dark',
             },
           },
           '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline':
             {
-              borderColor: () => (isDark ? 'white' : 'black'),
+              borderColor: () => 'dark',
             },
         }}
         renderInput={(params) => (
@@ -59,13 +57,10 @@ export default function Search() {
               inputLabel: {
                 className: 'text-red-500',
                 sx: {
-                  color: (theme) =>
-                    theme.palette.primary[isDark ? 'light' : 'dark'],
+                  color: (theme) => theme.palette.primary['dark'],
                   '&.Mui-focused': {
-                    color: (theme) =>
-                      theme.palette.primary[isDark ? 'light' : 'dark'],
-                    borderColor: (theme) =>
-                      theme.palette.primary[isDark ? 'light' : 'dark'],
+                    color: (theme) => theme.palette.primary['dark'],
+                    borderColor: (theme) => theme.palette.primary['dark'],
                   },
                 },
               },

@@ -16,10 +16,14 @@ export default function HeartIcon({ isFavorite, onToggle }: Props) {
     `text-nebula-800 dark:text-nebula-100  dark:text-nebula-100 `,
     'transition-all duration-200 ease-in-out',
   );
+  const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    onToggle();
+  };
   return (
     <div
       ref={ref}
-      onClick={onToggle}
+      onClick={handleClick}
       onMouseEnter={() => setHovering(true)}
       onMouseLeave={() => {
         setHovering(false);

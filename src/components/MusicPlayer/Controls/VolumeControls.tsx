@@ -1,7 +1,7 @@
 import { Volume2Icon, VolumeX } from 'lucide-react';
 import { useRef, useState } from 'react';
 import { IconButton, Popover, Slider } from '@mui/material';
-import useSongStore from '../../store';
+import useSongStore from '../../../store';
 
 export default function VolumeControls() {
   const [volumeOn, setVolumeOn] = useState(true);

@@ -22,7 +22,7 @@ export default function Favorites() {
     page * limit,
   );
   return (
-    <div className="flex flex-grow flex-col justify-center overflow-hidden">
+    <div className="flex flex-grow animate-fade flex-col justify-center overflow-hidden">
       <div
         ref={gridRef}
         className="flex flex-grow flex-col overflow-auto px-4 py-8 sm:px-2"
@@ -44,6 +44,7 @@ export default function Favorites() {
       {favoriteSongs.length > 0 && (
         <Pagination
           className="my-1 self-center"
+          color="secondary"
           count={Math.ceil(favoriteSongs.length / limit)}
           onChange={handlePageChange}
           results={favoriteSongs.length}

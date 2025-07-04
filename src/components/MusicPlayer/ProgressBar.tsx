@@ -4,11 +4,11 @@ import { useEffect, useState } from 'react';
 import formatTime from '../../utils/formatTime';
 
 export default function ProgressBar() {
-  const audio = useSongStore((s) => s.getAudio());
-  const repeat = useSongStore((s) => s.repeat);
-  const autoplay = useSongStore((s) => s.autoplay);
-  const setIsPlaying = useSongStore((s) => s.setCurrentPlaying);
   const [progress, setProgress] = useState(0);
+  const { repeat, autoplay, getAudio, setCurrentPlaying } = useSongStore(
+    (s) => s,
+  );
+  const audio = getAudio();
   const handleProgressChange = (_: Event, value: number | number[]) => {
     if (typeof value === 'number') {
       audio.currentTime = value;
@@ -25,7 +25,7 @@ export default function ProgressBar() {
         audio.pause();
         audio.currentTime = 0;
         setProgress(0);
-        setIsPlaying(false);
+        setCurrentPlaying(false);
       }
     };
 
@@ -33,7 +33,7 @@ export default function ProgressBar() {
     return () => {
       audio.removeEventListener('ended', handleEnded);
     };
-  }, [repeat, autoplay, audio, setIsPlaying, setProgress]);
+  }, [repeat, autoplay, audio, setCurrentPlaying, setProgress]);
   return (
     <div className="flex w-full flex-row items-center gap-2">
       <span className="pr-2 text-nebula-900 dark:text-nebula-100">

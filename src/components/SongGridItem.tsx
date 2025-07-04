@@ -64,14 +64,14 @@ export default function SongGridItem({ song }: Props) {
   };
 
   const selectedAnimationStyles = isPlaying ? 'animate-glow' : 'animate-none';
-  const selectedBorderStyles = isPlaying
-    ? 'border-cyan-500'
-    : 'border-transparent';
+  const borderStyles = `border-2 ${song.id === currentSong?.id ? 'border-cyan-500' : 'border-transparent'}`;
+
   return (
     <div
       className={clsx(
-        'rounded border-2 border-transparent shadow-lg shadow-gray-800/50',
-        song.id === currentSong?.id && selectedBorderStyles,
+        'animate-fade-up',
+        'rounded shadow-lg shadow-gray-800/50',
+        borderStyles,
       )}
     >
       <Card
@@ -133,13 +133,18 @@ export default function SongGridItem({ song }: Props) {
                 <Play className="h-12 w-12 text-nebula-900 dark:text-nebula-100" />
               </IconButton>
             )}
-            {isPlaying && currentSong?.id === song.id && (
+            {currentSong?.id === song.id && (
               <div className="flex gap-1 self-end">
-                <div className="rounded-full">
+                {isPlaying && (
                   <Disc3Icon className="animate-spin p-1 text-nebula-900/60 dark:text-nebula-100/60" />
-                </div>
-                <Typography className="text-sm italic text-nebula-900/60 animate-duration-500 dark:text-nebula-100/60">
-                  playing
+                )}
+                <Typography
+                  className={clsx(
+                    'text-sm italic text-nebula-900/60 animate-duration-500 dark:text-nebula-100/60',
+                    !isPlaying && 'pl-8',
+                  )}
+                >
+                  {isPlaying ? 'playing' : 'paused'}
                 </Typography>
               </div>
             )}

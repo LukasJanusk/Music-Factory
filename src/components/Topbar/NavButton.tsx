@@ -7,7 +7,7 @@ type Props = {
 };
 
 export function NavButton({ onClick, label }: Props) {
-  const { route } = useViewContext();
+  const { route, setRoute } = useViewContext();
 
   const baseButtonStyles =
     'border-2 border-transparent duration-200 group relative overflow-hidden';
@@ -15,9 +15,10 @@ export function NavButton({ onClick, label }: Props) {
   return (
     <button
       className={buttonStyles}
-      onClick={(e) => {
+      onClick={async (e) => {
         e.stopPropagation();
-        onClick();
+        await onClick();
+        setRoute(label);
       }}
     >
       <span> {label.slice(0, 1).toLocaleUpperCase() + label.slice(1)}</span>
