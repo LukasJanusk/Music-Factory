@@ -9,7 +9,9 @@ export default function ViewProvider({ children }: Props) {
 
   useEffect(() => {
     const path = '/' + route;
-    window.history.replaceState(null, '', path);
+    if (window.location.pathname !== path) {
+      window.history.pushState({}, '', path);
+    }
   }, [route]);
 
   return (

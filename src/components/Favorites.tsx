@@ -35,8 +35,8 @@ export default function Favorites() {
           wrap="wrap"
         >
           {paginatedFavorites.map((favorite) => (
-            <Grid size={{ xs: 12, sm: 10, md: 6, lg: 4 }}>
-              <SongGridItem key={favorite.id} song={favorite} />
+            <Grid key={favorite.id} size={{ xs: 12, sm: 10, md: 6, lg: 4 }}>
+              <SongGridItem song={favorite} />
             </Grid>
           ))}
         </Grid>

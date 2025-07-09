@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { useViewContext, type ROUTES } from '../../context/viewContext';
 
 type Props = {
-  onClick: () => void;
+  onClick: () => Promise<void> | void;
   label: ROUTES;
 };
 

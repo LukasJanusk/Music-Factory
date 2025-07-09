@@ -17,7 +17,7 @@ export function Playlist({ open, setIsOpen }: Props) {
       anchor="right"
       className=""
     >
-      <div className="flex flex-col overflow-hidden bg-nebula-200 dark:bg-nebula-800">
+      <div className="flex h-full flex-col overflow-hidden bg-nebula-200 dark:bg-nebula-800">
         <div className="flex flex-col overflow-auto">
           {songs.map((song) => {
             return (
@@ -33,6 +33,8 @@ export function Playlist({ open, setIsOpen }: Props) {
             minHeight: 64,
             borderRadius: 0,
             color: '#fff',
+            marginTop: 'auto',
+
             '&:hover': {
               backgroundColor: '#e0437d',
             },

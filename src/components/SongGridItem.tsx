@@ -78,8 +78,11 @@ export default function SongGridItem({ song }: Props) {
         elevation={0}
         sx={{
           display: 'flex',
-          minWidth: '380px',
           justifyContent: 'space-between',
+          width: '100%',
+          height: '100%',
+
+          overflow: 'hidden',
         }}
         className={clsx(song.id === currentSong?.id && selectedAnimationStyles)}
       >
