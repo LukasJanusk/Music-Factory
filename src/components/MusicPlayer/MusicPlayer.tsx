@@ -15,37 +15,37 @@ export default function MusicPlayer() {
   useAutoplay();
   const playerAnimationStyles = `animate-fade-up animate-duration-500 `;
 
+  if (!currentSong) return null;
+
   return (
-    currentSong && (
-      <div
-        className={clsx(
-          'flex h-auto w-full flex-col-reverse items-center justify-between self-end bg-nebula-300 p-2 shadow-lg md:flex-row md:gap-4 md:p-0 dark:bg-nebula-800',
-          playerAnimationStyles,
-        )}
-      >
-        <div className="flex items-center justify-around gap-4 text-black md:ml-4">
-          <div className="inline md:hidden">
-            <AutoplayButton />
-          </div>
-          <div className="flex items-center">
-            <PreviousButton />
-            <PlayButton />
-            <NextButton />
-          </div>
-          <div className="inline md:hidden">
-            <RepeatButton />
-          </div>
+    <div
+      className={clsx(
+        'flex h-auto w-full flex-col-reverse items-center justify-between self-end bg-nebula-300 p-2 shadow-lg md:flex-row md:gap-4 md:p-0 dark:bg-nebula-800',
+        playerAnimationStyles,
+      )}
+    >
+      <div className="flex items-center justify-around gap-4 text-black md:ml-4">
+        <div className="inline md:hidden">
+          <AutoplayButton />
         </div>
-        <div className="flex w-full flex-grow items-center gap-2 md:justify-between">
-          <div className="flex flex-grow items-center gap-2">
-            <ProgressBar />
-            <Controls />
-          </div>
-          <div className="flex items-end md:items-start">
-            <SongCard song={currentSong} />
-          </div>
+        <div className="flex items-center">
+          <PreviousButton />
+          <PlayButton />
+          <NextButton />
+        </div>
+        <div className="inline md:hidden">
+          <RepeatButton />
         </div>
       </div>
-    )
+      <div className="flex w-full flex-grow items-center gap-2 md:justify-between">
+        <div className="flex flex-grow items-center gap-2">
+          <ProgressBar />
+          <Controls />
+        </div>
+        <div className="flex items-end md:items-start">
+          <SongCard song={currentSong} />
+        </div>
+      </div>
+    </div>
   );
 }

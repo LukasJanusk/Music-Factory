@@ -17,8 +17,10 @@ export default function ProgressBar() {
   useEffect(() => {
     const update = () => setProgress(audio.currentTime);
     audio.addEventListener('timeupdate', update);
+
     return () => audio.removeEventListener('timeupdate', update);
   }, [audio]);
+
   useEffect(() => {
     const handleEnded = () => {
       if (!repeat || !autoplay) {
