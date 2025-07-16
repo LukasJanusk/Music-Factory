@@ -136,24 +136,28 @@ export default function SongGridItem({ song }: Props) {
                 <Play className="h-12 w-12 text-nebula-900 dark:text-nebula-100" />
               </IconButton>
             )}
-            {currentSong?.id === song.id && (
-              <div className="flex gap-1 self-end">
-                {isPlaying && (
-                  <Disc3Icon className="animate-spin p-1 text-nebula-900/60 dark:text-nebula-100/60" />
+            {currentSong?.id === song.id ? (
+              <div className="flex min-w-20 gap-1 self-end">
+                {isPlaying ? (
+                  <Disc3Icon className="w-6 animate-spin p-1 text-nebula-900/60 dark:text-nebula-100/60" />
+                ) : (
+                  <div className="w-6 p-1"></div>
                 )}
+
                 <Typography
                   className={clsx(
                     'text-sm italic text-nebula-900/60 animate-duration-500 dark:text-nebula-100/60',
-                    !isPlaying && 'pl-8',
                   )}
                 >
                   {isPlaying ? 'playing' : 'paused'}
                 </Typography>
               </div>
+            ) : (
+              <div className="min-w-20"></div>
             )}
             <Typography
               className="text-neutral-700 dark:text-nebula-100"
-              sx={{ paddingRight: 2, alignSelf: 'flex-end' }}
+              sx={{ paddingRight: 2, paddingLeft: 2, alignSelf: 'flex-end' }}
             >
               {formatTime(song.duration)}
             </Typography>

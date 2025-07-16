@@ -15,7 +15,7 @@ export function Playlist({ open, setIsOpen }: Props) {
       onClose={() => setIsOpen(false)}
       variant="temporary"
       anchor="right"
-      className=""
+      className="!pt-[env(safe-area-inset-top)]"
     >
       <div className="flex h-full flex-col overflow-hidden bg-nebula-200 dark:bg-nebula-800">
         <div className="flex flex-col overflow-auto">
@@ -30,7 +30,7 @@ export function Playlist({ open, setIsOpen }: Props) {
         <Button
           sx={{
             backgroundColor: '#FF4E8E',
-            minHeight: 64,
+            minHeight: 80,
             borderRadius: 0,
             color: '#fff',
             marginTop: 'auto',

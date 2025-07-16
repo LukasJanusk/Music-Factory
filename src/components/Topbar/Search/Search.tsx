@@ -21,7 +21,7 @@ export default function Search() {
   };
 
   return (
-    <div className="min-w-64">
+    <div className="min-w-60">
       <Autocomplete
         slotProps={{
           listbox: {
@@ -55,7 +55,6 @@ export default function Search() {
             className="rounded-md bg-nebula-200 text-nebula-900 dark:bg-nebula-600 dark:text-nebula-200"
             slotProps={{
               inputLabel: {
-                className: 'text-red-500',
                 sx: {
                   color: (theme) => theme.palette.primary['dark'],
                   '&.Mui-focused': {

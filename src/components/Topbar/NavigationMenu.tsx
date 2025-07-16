@@ -35,13 +35,13 @@ export default function NavigationMenu() {
         <MenuIcon className="h-10 w-10 text-nebula-700 md:hidden dark:text-nebula-200" />
       </IconButton>
       <Menu
-        id="basic-menu"
+        id="menu"
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
         slotProps={{
           list: {
-            'aria-labelledby': 'basic-button',
+            'aria-labelledby': 'button',
           },
         }}
       >

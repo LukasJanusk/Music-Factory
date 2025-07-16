@@ -20,7 +20,7 @@ export default function MusicPlayer() {
   return (
     <div
       className={clsx(
-        'flex h-auto w-full flex-col-reverse items-center justify-between self-end bg-nebula-300 p-2 shadow-lg md:flex-row md:gap-4 md:p-0 dark:bg-nebula-800',
+        'flex h-auto w-full flex-col-reverse items-center justify-between self-end bg-nebula-300 p-2 pb-4 shadow-lg md:flex-row md:gap-4 md:p-0 dark:bg-nebula-800',
         playerAnimationStyles,
       )}
     >

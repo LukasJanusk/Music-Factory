@@ -17,7 +17,11 @@ export function useAutoplay() {
         } catch (error) {
           popup(
             'error',
-            error instanceof Error ? error.message : 'Unable to play audio',
+            error instanceof Error
+              ? error.message.length > 23
+                ? error.message.slice(0, 20) + '...'
+                : error.message
+              : 'Unable to play audio',
           );
         }
       }

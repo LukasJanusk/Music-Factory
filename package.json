@@ -8,10 +8,14 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "format": "npx prettier --write .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "build:android": "tsc -b && vite build && npx cap sync android && cd android && ./gradleW assembleDebug"
   },
   "dependencies": {
     "@base-ui-components/react": "^1.0.0-beta.0",
+    "@capacitor/android": "^7.4.2",
+    "@capacitor/cli": "^7.4.2",
+    "@capacitor/core": "^7.4.2",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@mui/material": "^7.1.2",
@@ -26,6 +30,7 @@
     "zustand": "^5.0.6"
   },
   "devDependencies": {
+    "@capacitor/assets": "^3.0.5",
     "@eslint/js": "^9.25.0",
     "@types/node": "^24.0.4",
     "@types/react": "^19.1.2",
