@@ -23,6 +23,7 @@ export function useAutoplay() {
       }
     };
     audio.addEventListener('ended', autoPlayNext);
+
     return () => {
       audio.removeEventListener('ended', autoPlayNext);
     };

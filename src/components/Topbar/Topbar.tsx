@@ -26,7 +26,7 @@ export default function Topbar() {
           />
           <NavButton
             label={'favorites'}
-            onClick={async () => {
+            onClick={() => {
               setSongs(favoriteSongs);
             }}
           />

@@ -1,7 +1,7 @@
 import { IconButton } from '@mui/material';
 import clsx from 'clsx';
 import { HeartMinus, HeartPlusIcon } from 'lucide-react';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 
 type Props = {
   isFavorite: boolean;
@@ -9,7 +9,6 @@ type Props = {
 };
 
 export default function HeartIcon({ isFavorite, onToggle }: Props) {
-  const ref = useRef<HTMLDivElement | null>(null);
   const [hovering, setHovering] = useState(false);
   const heartStyles = clsx(
     hovering && `dark:hover:text-nebula-400 hover:text-nebula-600`,
@@ -22,7 +21,6 @@ export default function HeartIcon({ isFavorite, onToggle }: Props) {
   };
   return (
     <div
-      ref={ref}
       onClick={handleClick}
       onMouseEnter={() => setHovering(true)}
       onMouseLeave={() => {
