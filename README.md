@@ -1,6 +1,6 @@
 # React Music Player
 
-![website screenshots](https://github.com/LukasJanusk/Music-Factory/blob/main/screenshots/music-factory-2025-09-25-1.jpg?raw=true)
+![website screenshots](https://github.com/LukasJanusk/Music-Factory/blob/main/screenshots/music-factory-2025-09-25-1.png?raw=true)
 
 ## Install
 
